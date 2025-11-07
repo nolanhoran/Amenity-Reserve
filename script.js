@@ -1,14 +1,24 @@
 let bookedDates = [];
 
+function loadBookings() {
+  db.collection("bookings").get().then((querySnapshot) => {
+    bookedDates = [];
+    querySnapshot.forEach((doc) => {
+      bookedDates.push(doc.id);
+    });
+    renderCalendar();
+  });
+}
+
 function renderCalendar() {
   const calendar = document.getElementById('calendar');
   calendar.innerHTML = '';
   const today = new Date();
-  for (let i = 0; i < 30; i++) { // show next 30 days
+  for (let i = 0; i < 30; i++) {
     const day = new Date();
     day.setDate(today.getDate() + i);
     const dayStr = day.toISOString().split('T')[0];
-    
+
     const div = document.createElement('div');
     div.className = 'day';
     div.textContent = day.getDate();
@@ -33,9 +43,19 @@ function book() {
     alert('Please select a date and time.');
     return;
   }
-  bookedDates.push(date);
-  alert(`Booked ${date} at ${time}`);
-  renderCalendar();
+
+  db.collection("bookings").doc(date).get().then((doc) => {
+    if (doc.exists) {
+      alert('This day is already booked.');
+    } else {
+      db.collection("bookings").doc(date).set({ time: time }).then(() => {
+        alert(`Booked ${date} at ${time}`);
+        bookedDates.push(date);
+        renderCalendar();
+      });
+    }
+  });
 }
 
-renderCalendar();
+// Load bookings on page load
+loadBookings();
