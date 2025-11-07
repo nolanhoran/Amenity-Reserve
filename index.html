@@ -15,6 +15,27 @@
     <button onclick="book()">Book</button>
   </div>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCvUpW285Yr3y1W1P8CXg3ufRVkIvs2qLA",
+      authDomain: "amenity-reservations.firebaseapp.com",
+      projectId: "amenity-reservations",
+      storageBucket: "amenity-reservations.firebasestorage.app",
+      messagingSenderId: "596208433531",
+      appId: "1:596208433531:web:d537888707ceeb2fb825de",
+      measurementId: "G-9MWB3VGZ44"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
