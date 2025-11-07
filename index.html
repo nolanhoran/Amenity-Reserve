@@ -6,8 +6,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Banner Image -->
+  <div id="banner">
+    <img src="banner.jpg" alt="Amenity Booking" id="banner-img">
+  </div>
+
   <h1>Amenity Booking</h1>
+
+  <!-- Month Navigation -->
+  <div id="calendar-controls">
+    <button onclick="prevMonth()">◀</button>
+    <span id="month-year"></span>
+    <button onclick="nextMonth()">▶</button>
+  </div>
+
+  <!-- Weekday headers -->
+  <div id="calendar-header">
+    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+    <div>Thu</div><div>Fri</div><div>Sat</div>
+  </div>
+
+  <!-- Calendar grid -->
   <div id="calendar"></div>
+
+  <!-- Booking form -->
   <div id="booking-form">
     <h2>Book a Reservation</h2>
     <label>Date: <input type="date" id="date"></label>
@@ -20,7 +43,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <script>
-    // Your Firebase configuration
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCvUpW285Yr3y1W1P8CXg3ufRVkIvs2qLA",
       authDomain: "amenity-reservations.firebaseapp.com",
